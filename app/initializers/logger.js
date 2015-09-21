@@ -1,5 +1,11 @@
-export function initialize(/* container, application */) {
-  // application.inject('route', 'foo', 'service:foo');
+export function initialize(registry, application) {
+  var logger = Ember.Object.extend({
+    log: function(message) {
+      console.log(message);
+    }
+  });
+  application.register('logger:main', logger);
+  application.inject('route', 'logger', 'logger:main');
 }
 
 export default {

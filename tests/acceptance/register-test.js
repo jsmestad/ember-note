@@ -15,7 +15,12 @@ module('Acceptance | register', {
 test('visiting /register', function(assert) {
   visit('/register');
 
+  fillIn('#name', 'test@pragprog.com');
+  click('#register');
+
   andThen(function() {
+    assert.equal(find('#message').text().trim(),
+                'A new user with the name "test@pragprog.com" was added!');
     assert.equal(currentURL(), '/register');
   });
 });
